@@ -23,9 +23,8 @@ class SamlContainer extends AbstractContainer
 
     public function redirect($url, $data = [])
     {
-        $url = Url::to([$url, $data],true);
+        $url = Url::to([$url, $data], true);
         header('Location: ' . $url);
-        exit;
     }
 
     public function postRedirect($url, $data = [])

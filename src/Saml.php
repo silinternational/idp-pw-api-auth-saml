@@ -2,8 +2,8 @@
 namespace Sil\IdpPw\Auth;
 
 use RobRichards\XMLSecLibs\XMLSecurityKey;
-use SAML2\Compat\ContainerSingleton;
 use SAML2\AuthnRequest;
+use SAML2\Compat\ContainerSingleton;
 use SAML2\EncryptedAssertion;
 use SAML2\HTTPPost;
 use SAML2\HTTPRedirect;
@@ -96,8 +96,8 @@ class Saml extends Component implements AuthnInterface
         $required = [
             'assertionConsumerServiceUrl', 'ssoUrl', 'sloUrl', 'attributeMap'
         ];
-        foreach($required as $field) {
-            if(is_null($this->$field)) {
+        foreach ($required as $field) {
+            if (is_null($this->$field)) {
                 throw new \Exception(
                     'Missing required configuration for ' . $field . ' in auth component configuration',
                     1459883515
@@ -108,21 +108,21 @@ class Saml extends Component implements AuthnInterface
         /*
          * Ensure conditionally required properties are set when needed
          */
-        if($this->signRequest && (is_null($this->spCertificate) || is_null($this->spPrivateKey)) ) {
+        if ($this->signRequest && (is_null($this->spCertificate) || is_null($this->spPrivateKey)) ) {
             throw new \Exception(
                 'Signing requests requires spCertificate and spPrivateKey to be set in auth component configuration',
                 1459883965
             );
         }
 
-        if($this->checkResponseSigning && is_null($this->idpCertificate)) {
+        if ($this->checkResponseSigning && is_null($this->idpCertificate)) {
             throw new \Exception(
                 'Checking if responses are signed requires idpCertificate to be set in auth component configuration',
                 145988396
             );
         }
 
-        if($this->requireEncryptedAssertion && is_null($this->encryptionKey)) {
+        if ($this->requireEncryptedAssertion && is_null($this->encryptionKey)) {
             throw new \Exception(
                 'Decrypting assertions requires encryptionKey to be set in auth component configuration',
                 145988397
@@ -148,7 +148,7 @@ class Saml extends Component implements AuthnInterface
         /*
          * Issuer defaults to assertionConsumerServiceUrl, but can be overriden by setting entityId
          */
-        if(!is_null($this->entityId)) {
+        if ( ! is_null($this->entityId)) {
             $request->setIssuer($this->entityId);
         } else {
             $request->setIssuer($this->assertionConsumerServiceUrl);
@@ -159,14 +159,14 @@ class Saml extends Component implements AuthnInterface
         /*
          * Sign request if spCertificate and spPrivateKey are provided
          */
-        if($this->signRequest && $this->spCertificate && $this->spPrivateKey) {
-            $request->setCertificates($this->spCertificate);
+        if ($this->signRequest) {
+            $request->setCertificates([$this->spCertificate]);
 
             $key = new XMLSecurityKey(
                 XMLSecurityKey::RSA_SHA1,
                 ['type' => 'private']
             );
-            $key->loadKey($this->spPrivateKey,false);
+            $key->loadKey($this->spPrivateKey, false);
             $request->setSignatureKey($key);
         }
 
@@ -189,18 +189,18 @@ class Saml extends Component implements AuthnInterface
             return null;
         }
 
-        try{
+        try {
 
             /*
              * If needed, check if response is signed
              */
-            if($this->checkResponseSigning) {
+            if ($this->checkResponseSigning) {
                 $idpKey = new XMLSecurityKey(
                     XMLSecurityKey::RSA_SHA1,
                     ['type' => 'public']
                 );
-                $idpKey->loadKey($this->idpCertificate,false,true);
-                if(!$response->validate($idpKey)) {
+                $idpKey->loadKey($this->idpCertificate, false, true);
+                if ( ! $response->validate($idpKey)) {
                     throw new \Exception(
                         'SAML response was not signed properly',
                         1459884735
@@ -214,21 +214,20 @@ class Saml extends Component implements AuthnInterface
             /*
              * If requiring encrypted assertion, use key to decrypt it
              */
-            if($this->requireEncryptedAssertion) {
+            if ($this->requireEncryptedAssertion) {
                 $decryptKey = new XMLSecurityKey(
                     XMLSecurityKey::AES128_CBC,
                     ['type' => 'private']
                 );
-                $decryptKey->loadKey($this->encryptionKey,false,false);
+                $decryptKey->loadKey($this->encryptionKey, false, false);
 
-                if( ! $assertions[0] instanceof EncryptedAssertion) {
+                if ( ! $assertions[0] instanceof EncryptedAssertion) {
                     throw new \Exception(
                         'Response assertion is required to be encrypted but was not',
                         1459884392
                     );
                 }
 
-                /** @var \SAML2\Assertion $assertion */
                 $assertion = $assertions[0]->getAssertion($decryptKey);
             } else {
                 $assertion = $assertions[0];
@@ -238,6 +237,7 @@ class Saml extends Component implements AuthnInterface
              * Get attributes using mapping config, make sure expected fields
              * are present, and return as new User
              */
+            /** @var \SAML2\Assertion $assertion */
             $samlAttrs = $assertion->getAttributes();
             $normalizedAttrs = $this->extractSamlAttributes($samlAttrs, $this->attributeMap);
             $this->assertHasRequiredSamlAttributes($normalizedAttrs, $this->attributeMap);
@@ -261,12 +261,12 @@ class Saml extends Component implements AuthnInterface
     }
 
     /**
-     * @param \Sil\IdpPw\Common\Auth\User $user
+     * @param null|\Sil\IdpPw\Common\Auth\User $user
      * @return void|null
      */
     public function logout(AuthUser $user = null)
     {
-        header('Location: '.$this->sloUrl);
+        header('Location: ' . $this->sloUrl);
         return null;
     }
 
@@ -281,9 +281,9 @@ class Saml extends Component implements AuthnInterface
     {
         $attrs = [];
 
-        foreach($map as $attr => $details){
-            if(isset($details['element'])){
-                if(isset($attributes[$details['field']][$details['element']])){
+        foreach ($map as $attr => $details){
+            if (isset($details['element'])){
+                if (isset($attributes[$details['field']][$details['element']])){
                     $attrs[$attr] = $attributes[$details['field']][$details['element']];
                 }
             } else {
@@ -305,8 +305,8 @@ class Saml extends Component implements AuthnInterface
     public function assertHasRequiredSamlAttributes($attributes, $map)
     {
         foreach ($map as $key => $value) {
-            if(!array_key_exists($key, $attributes)){
-                throw new \Exception("SAML attributes missing attribute: $key",1454436522);
+            if ( ! array_key_exists($key, $attributes)){
+                throw new \Exception('SAML attributes missing attribute: ' . $key, 1454436522);
             }
         }
     }
