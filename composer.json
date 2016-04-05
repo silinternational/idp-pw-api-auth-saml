@@ -1,0 +1,24 @@
+{
+    "name": "silinternational/idp-pw-api-auth-saml",
+    "description": "SAML Auth component for IdP PW API",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Phillip Shipley",
+            "email": "phillip_shipley@sil.org"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "2.0.6",
+        "silinternational/yii2-jsonsyslog": "*",
+        "simplesamlphp/saml2": "^2.2",
+        "silinternational/idp-pw-api-common": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sil\\IdpPw\\Auth\\": "src/"
+        }
+    }
+}
