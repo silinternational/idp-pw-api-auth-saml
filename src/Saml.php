@@ -251,11 +251,20 @@ class Saml extends Component implements AuthnInterface
 
     /**
      * @param null|\Sil\IdpPw\Common\Auth\User $user
+     * @param string $returnTo Where to have IdP send user after logout
      * @return void|null
      */
-    public function logout(AuthUser $user = null)
+    public function logout(AuthUser $user = null, $returnTo)
     {
-        header('Location: ' . $this->sloUrl);
+        if (substr_count($this->sloUrl, '?') > 0) {
+            $joinChar = '&';
+        } else {
+            $joinChar = '?';
+        }
+
+        $url = $this->sloUrl . $joinChar . urlencode($returnTo);
+
+        header('Location: ' . $url);
         return null;
     }
 
