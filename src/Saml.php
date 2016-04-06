@@ -123,6 +123,14 @@ class Saml extends Component implements AuthnInterface
             );
         }
 
+        // check idpCertificate to see if PEM encoded and if not attempt to do so
+        if ( substr($this->idpCertificate, 0, 1) !== '-') {
+            $this->idpCertificate = preg_replace('/\s+/', '', $this->idpCertificate);
+            $this->idpCertificate = "-----BEGIN CERTIFICATE-----\n" .
+                chunk_split($this->idpCertificate, 64) .
+                "-----END CERTIFICATE-----\n";
+        }
+
         // check spPrivateKey to see if PEM encoded and if not attempt to do so
         if ( substr($this->spPrivateKey, 0, 1) !== '-') {
             $this->spPrivateKey = preg_replace('/\s+/', '', $this->spPrivateKey);
