@@ -265,7 +265,7 @@ class Saml extends Component implements AuthnInterface
         $url = $this->sloUrl . $joinChar . urlencode($returnTo);
 
         header('Location: ' . $url);
-        return null;
+        exit;
     }
 
     /**

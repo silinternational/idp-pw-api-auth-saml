@@ -33,6 +33,7 @@ class SamlContainer extends AbstractContainer
         }
 
         header('Location: ' . $url);
+        exit;
     }
 
     public function postRedirect($url, $data = [])
