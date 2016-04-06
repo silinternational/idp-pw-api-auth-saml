@@ -132,7 +132,7 @@ class Saml extends Component implements AuthnInterface
     /**
      * @param \yii\web\Request|null $request
      * @param string $returnTo Where to have IdP send user after login
-     * @return \Sil\IdpPw\Common\Auth\User|null If null is returned the user was redirected to IdP
+     * @return \Sil\IdpPw\Common\Auth\User|void If null is returned the user was redirected to IdP
      * @throws \Sil\IdpPw\Common\Auth\InvalidLoginException
      */
     public function login(Request $request = null, $returnTo)
@@ -175,8 +175,7 @@ class Saml extends Component implements AuthnInterface
              */
             $binding = new HTTPRedirect();
             $binding->send($request);
-
-            return null;
+            exit;
         }
 
         try {
@@ -252,7 +251,7 @@ class Saml extends Component implements AuthnInterface
     /**
      * @param null|\Sil\IdpPw\Common\Auth\User $user
      * @param string $returnTo Where to have IdP send user after logout
-     * @return void|null
+     * @return void
      */
     public function logout(AuthUser $user = null, $returnTo)
     {
@@ -262,7 +261,7 @@ class Saml extends Component implements AuthnInterface
             $joinChar = '?';
         }
 
-        $url = $this->sloUrl . $joinChar . urlencode($returnTo);
+        $url = $this->sloUrl . $joinChar . 'ReturnTo=' . urlencode($returnTo);
 
         header('Location: ' . $url);
         exit;
