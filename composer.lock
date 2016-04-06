@@ -432,12 +432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silinternational/idp-pw-api-common.git",
-                "reference": "ae9e5a87705c504d99c0c587cc056f10550499f4"
+                "reference": "bc897864c602f8ff0c2754f15fb661a1075f954a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silinternational/idp-pw-api-common/zipball/ae9e5a87705c504d99c0c587cc056f10550499f4",
-                "reference": "ae9e5a87705c504d99c0c587cc056f10550499f4",
+                "url": "https://api.github.com/repos/silinternational/idp-pw-api-common/zipball/bc897864c602f8ff0c2754f15fb661a1075f954a",
+                "reference": "bc897864c602f8ff0c2754f15fb661a1075f954a",
                 "shasum": ""
             },
             "require": {
@@ -464,7 +464,7 @@
                 }
             ],
             "description": "Common interfaces and bases classes for integration components.",
-            "time": "2016-04-05 19:45:41"
+            "time": "2016-04-06 18:28:26"
         },
         {
             "name": "silinternational/yii2-jsonsyslog",

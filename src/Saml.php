@@ -56,12 +56,6 @@ class Saml extends Component implements AuthnInterface
     public $spPrivateKey;
 
     /**
-     * URL for this SP for user to be returned to after login
-     * @var string
-     */
-    public $assertionConsumerServiceUrl;
-
-    /**
      * This SP Entity ID as known by the remote IdP
      * @var string
      */
@@ -91,7 +85,7 @@ class Saml extends Component implements AuthnInterface
          * Ensure all required properties are set
          */
         $required = [
-            'assertionConsumerServiceUrl', 'ssoUrl', 'sloUrl', 'attributeMap'
+            'ssoUrl', 'sloUrl', 'attributeMap'
         ];
         foreach ($required as $field) {
             if (is_null($this->$field)) {
@@ -137,26 +131,19 @@ class Saml extends Component implements AuthnInterface
 
     /**
      * @param \yii\web\Request|null $request
+     * @param string $returnTo Where to have IdP send user after login
      * @return \Sil\IdpPw\Common\Auth\User|null If null is returned the user was redirected to IdP
      * @throws \Sil\IdpPw\Common\Auth\InvalidLoginException
      */
-    public function login(Request $request = null)
+    public function login(Request $request = null, $returnTo)
     {
         $container = new SamlContainer();
         ContainerSingleton::setContainer($container);
 
         $request = new AuthnRequest();
         $request->setId($container->generateId());
-        $request->setAssertionConsumerServiceURL($this->assertionConsumerServiceUrl);
-        /*
-         * Issuer defaults to assertionConsumerServiceUrl, but can be overriden by setting entityId
-         */
-        if ( ! is_null($this->entityId)) {
-            $request->setIssuer($this->entityId);
-        } else {
-            $request->setIssuer($this->assertionConsumerServiceUrl);
-        }
-
+        $request->setAssertionConsumerServiceURL($returnTo);
+        $request->setIssuer($this->entityId);
         $request->setDestination($this->ssoUrl);
 
         /*
