@@ -53,12 +53,6 @@ class Saml extends Component implements AuthnInterface
     public $spPrivateKey;
 
     /**
-     * AES-128-CBC encryption key for decrypting attribute data
-     * @var string|null If null, response is not expected to be encrypted
-     */
-    public $encryptionKey;
-
-    /**
      * URL for this SP for user to be returned to after login
      * @var string
      */
@@ -122,11 +116,19 @@ class Saml extends Component implements AuthnInterface
             );
         }
 
-        if ($this->requireEncryptedAssertion && is_null($this->encryptionKey)) {
+        if ($this->requireEncryptedAssertion && is_null($this->spPrivateKey)) {
             throw new \Exception(
-                'Decrypting assertions requires encryptionKey to be set in auth component configuration',
+                'Decrypting assertions requires spPrivateKey to be set in auth component configuration',
                 145988397
             );
+        }
+
+        // check spPrivateKey to see if PEM encoded and if not attempt to do so
+        if ( substr($this->spPrivateKey, 0, 1) !== '-') {
+            $this->spPrivateKey = preg_replace('/\s+/', '', $this->spPrivateKey);
+            $this->spPrivateKey = "-----BEGIN PRIVATE KEY-----\n" .
+                chunk_split($this->spPrivateKey, 64) .
+                "-----END PRIVATE KEY-----\n";
         }
 
         parent::init();
@@ -160,7 +162,7 @@ class Saml extends Component implements AuthnInterface
          * Sign request if spCertificate and spPrivateKey are provided
          */
         if ($this->signRequest) {
-            $request->setCertificates([$this->spCertificate]);
+            //$request->setCertificates([$this->spCertificate]);
 
             $key = new XMLSecurityKey(
                 XMLSecurityKey::RSA_SHA1,
@@ -210,16 +212,15 @@ class Saml extends Component implements AuthnInterface
 
             /** @var \SAML2\Assertion[]|\SAML2\EncryptedAssertion[] $assertions */
             $assertions = $response->getAssertions();
-
             /*
              * If requiring encrypted assertion, use key to decrypt it
              */
             if ($this->requireEncryptedAssertion) {
                 $decryptKey = new XMLSecurityKey(
-                    XMLSecurityKey::AES128_CBC,
+                    XMLSecurityKey::RSA_OAEP_MGF1P,
                     ['type' => 'private']
                 );
-                $decryptKey->loadKey($this->encryptionKey, false, false);
+                $decryptKey->loadKey($this->spPrivateKey, false, false);
 
                 if ( ! $assertions[0] instanceof EncryptedAssertion) {
                     throw new \Exception(

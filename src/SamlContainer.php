@@ -2,13 +2,12 @@
 namespace Sil\IdpPw\Auth;
 
 use SAML2\Compat\AbstractContainer;
-use yii\helpers\Url;
 
 class SamlContainer extends AbstractContainer
 {
     public function getLogger()
     {
-        return \Yii::getLogger();
+        return new \Monolog\Logger('log');
     }
 
     public function generateId()
@@ -23,7 +22,16 @@ class SamlContainer extends AbstractContainer
 
     public function redirect($url, $data = [])
     {
-        $url = Url::to([$url, $data], true);
+        foreach ($data as $key => $value) {
+            if (substr_count($url, '?') > 0) {
+                $url .= '&';
+            } else {
+                $url .= '?';
+            }
+
+            $url .= $key . '=' . urlencode($value);
+        }
+
         header('Location: ' . $url);
     }
 
