@@ -16,6 +16,9 @@ use yii\web\Request;
 class Saml extends Component implements AuthnInterface
 {
 
+    const TYPE_PUBLIC = 'public';
+    const TYPE_PRIVATE = 'private';
+
     /**
      * Whether or not to sign request
      * @var bool [default=true]
@@ -124,20 +127,10 @@ class Saml extends Component implements AuthnInterface
         }
 
         // check idpCertificate to see if PEM encoded and if not attempt to do so
-        if ( substr($this->idpCertificate, 0, 1) !== '-') {
-            $this->idpCertificate = preg_replace('/\s+/', '', $this->idpCertificate);
-            $this->idpCertificate = "-----BEGIN CERTIFICATE-----\n" .
-                chunk_split($this->idpCertificate, 64) .
-                "-----END CERTIFICATE-----\n";
-        }
+        $this->idpCertificate = $this->pemEncodeCertificate($this->idpCertificate, self::TYPE_PUBLIC);
 
         // check spPrivateKey to see if PEM encoded and if not attempt to do so
-        if ( substr($this->spPrivateKey, 0, 1) !== '-') {
-            $this->spPrivateKey = preg_replace('/\s+/', '', $this->spPrivateKey);
-            $this->spPrivateKey = "-----BEGIN PRIVATE KEY-----\n" .
-                chunk_split($this->spPrivateKey, 64) .
-                "-----END PRIVATE KEY-----\n";
-        }
+        $this->spPrivateKey = $this->pemEncodeCertificate($this->spPrivateKey, self::TYPE_PRIVATE);
 
         parent::init();
     }
@@ -318,5 +311,27 @@ class Saml extends Component implements AuthnInterface
                 throw new \Exception('SAML attributes missing attribute: ' . $key, 1454436522);
             }
         }
+    }
+
+    /**
+     * Simple solution for PEM encoding cert data
+     * @param string $data
+     * @param string $type Either self::TYPE_PUBLIC or self::TYPE_PRIVATE
+     * @return string
+     */
+    public function pemEncodeCertificate($data, $type)
+    {
+        if ( substr($data, 0, 1) !== '-') {
+
+            $prefix = $type == self::TYPE_PUBLIC ? '-----BEGIN CERTIFICATE-----' : '-----BEGIN PRIVATE KEY-----';
+            $suffix = $type == self::TYPE_PUBLIC ? '-----END CERTIFICATE-----' : '-----END PRIVATE KEY-----';
+
+            $data = preg_replace('/\s+/', '', $data);
+            $data = $prefix . PHP_EOL .
+                chunk_split($data, 64) .
+                $suffix . PHP_EOL;
+        }
+
+        return $data;
     }
 }
