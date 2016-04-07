@@ -130,12 +130,12 @@ class Saml extends Component implements AuthnInterface
     }
 
     /**
-     * @param \yii\web\Request|null $request
      * @param string $returnTo Where to have IdP send user after login
+     * @param \yii\web\Request|null $request
      * @return \Sil\IdpPw\Common\Auth\User|void If null is returned the user was redirected to IdP
      * @throws \Sil\IdpPw\Common\Auth\InvalidLoginException
      */
-    public function login(Request $request = null, $returnTo)
+    public function login($returnTo, Request $request = null)
     {
         $container = new SamlContainer();
         ContainerSingleton::setContainer($container);
@@ -150,8 +150,6 @@ class Saml extends Component implements AuthnInterface
          * Sign request if spCertificate and spPrivateKey are provided
          */
         if ($this->signRequest) {
-            //$request->setCertificates([$this->spCertificate]);
-
             $key = new XMLSecurityKey(
                 XMLSecurityKey::RSA_SHA1,
                 ['type' => 'private']
@@ -159,7 +157,6 @@ class Saml extends Component implements AuthnInterface
             $key->loadKey($this->spPrivateKey, false);
             $request->setSignatureKey($key);
         }
-
 
         try {
             /*
@@ -249,11 +246,11 @@ class Saml extends Component implements AuthnInterface
     }
 
     /**
-     * @param null|\Sil\IdpPw\Common\Auth\User $user
      * @param string $returnTo Where to have IdP send user after logout
+     * @param null|\Sil\IdpPw\Common\Auth\User $user
      * @return void
      */
-    public function logout(AuthUser $user = null, $returnTo)
+    public function logout($returnTo, AuthUser $user = null)
     {
         if (substr_count($this->sloUrl, '?') > 0) {
             $joinChar = '&';
