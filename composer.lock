@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f9b2920ba83c474d4182aa835219317b",
+    "hash": "cd27bf3bba46dcc8437eacd42233f07a",
     "content-hash": "0a0451e231a9d0d4b365c86ddcf90099",
     "packages": [
         {
@@ -432,12 +432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silinternational/idp-pw-api-common.git",
-                "reference": "e0ca777c0de84664858a8a2eb8136d24a7f5bf34"
+                "reference": "8256c143c07e6c6f80cac9bb106ea1d8b2de7904"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silinternational/idp-pw-api-common/zipball/e0ca777c0de84664858a8a2eb8136d24a7f5bf34",
-                "reference": "e0ca777c0de84664858a8a2eb8136d24a7f5bf34",
+                "url": "https://api.github.com/repos/silinternational/idp-pw-api-common/zipball/8256c143c07e6c6f80cac9bb106ea1d8b2de7904",
+                "reference": "8256c143c07e6c6f80cac9bb106ea1d8b2de7904",
                 "shasum": ""
             },
             "require": {
@@ -464,7 +464,7 @@
                 }
             ],
             "description": "Common interfaces and bases classes for integration components.",
-            "time": "2016-04-07 12:33:07"
+            "time": "2016-04-07 13:34:25"
         },
         {
             "name": "silinternational/yii2-jsonsyslog",

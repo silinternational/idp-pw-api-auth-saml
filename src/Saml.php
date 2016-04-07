@@ -9,6 +9,7 @@ use SAML2\HTTPPost;
 use SAML2\HTTPRedirect;
 use Sil\IdpPw\Common\Auth\AuthnInterface;
 use Sil\IdpPw\Common\Auth\InvalidLoginException;
+use Sil\IdpPw\Common\Auth\RedirectException;
 use Sil\IdpPw\Common\Auth\User as AuthUser;
 use yii\base\Component;
 use yii\web\Request;
@@ -132,8 +133,9 @@ class Saml extends Component implements AuthnInterface
     /**
      * @param string $returnTo Where to have IdP send user after login
      * @param \yii\web\Request|null $request
-     * @return \Sil\IdpPw\Common\Auth\User|void If null is returned the user was redirected to IdP
+     * @return \Sil\IdpPw\Common\Auth\User
      * @throws \Sil\IdpPw\Common\Auth\InvalidLoginException
+     * @throws RedirectException
      */
     public function login($returnTo, Request $request = null)
     {
@@ -171,8 +173,8 @@ class Saml extends Component implements AuthnInterface
              * User was not logged in, so redirect to IdP for login
              */
             $binding = new HTTPRedirect();
-            $binding->send($request);
-            exit;
+            $url = $binding->getRedirectURL($request);
+            throw new RedirectException($url);
         }
 
         try {
@@ -249,6 +251,7 @@ class Saml extends Component implements AuthnInterface
      * @param string $returnTo Where to have IdP send user after logout
      * @param null|\Sil\IdpPw\Common\Auth\User $user
      * @return void
+     * @throws RedirectException
      */
     public function logout($returnTo, AuthUser $user = null)
     {
@@ -259,9 +262,7 @@ class Saml extends Component implements AuthnInterface
         }
 
         $url = $this->sloUrl . $joinChar . 'ReturnTo=' . urlencode($returnTo);
-
-        header('Location: ' . $url);
-        exit;
+        throw new RedirectException($url);
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace Sil\IdpPw\Auth;
 
 use SAML2\Compat\AbstractContainer;
+use Sil\IdpPw\Common\Auth\RedirectException;
 
 class SamlContainer extends AbstractContainer
 {
@@ -32,8 +33,7 @@ class SamlContainer extends AbstractContainer
             $url .= $key . '=' . urlencode($value);
         }
 
-        header('Location: ' . $url);
-        exit;
+        throw new RedirectException($url);
     }
 
     public function postRedirect($url, $data = [])
