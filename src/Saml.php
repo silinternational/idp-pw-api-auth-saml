@@ -144,9 +144,9 @@ class Saml extends Component implements AuthnInterface
 
         $request = new AuthnRequest();
         $request->setId($container->generateId());
-        $request->setAssertionConsumerServiceURL($returnTo);
         $request->setIssuer($this->entityId);
         $request->setDestination($this->ssoUrl);
+        $request->setRelayState($returnTo);
 
         /*
          * Sign request if spCertificate and spPrivateKey are provided
