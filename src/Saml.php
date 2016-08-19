@@ -299,9 +299,13 @@ class Saml extends Component implements AuthnInterface
      */
     public function assertHasRequiredSamlAttributes($attributes, $map)
     {
+        $username = isset($attributes['idp_username']) ? $attributes['idp_username'] : 'missing username';
         foreach ($map as $key => $value) {
             if ( ! array_key_exists($key, $attributes)){
-                throw new \Exception('SAML attributes missing attribute: ' . $key, 1454436522);
+                throw new \Exception(
+                    'SAML attributes missing attribute: ' . $key . ' for user ' . $username,
+                    1454436522
+                );
             }
         }
     }
