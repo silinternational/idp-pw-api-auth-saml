@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cd27bf3bba46dcc8437eacd42233f07a",
-    "content-hash": "0a0451e231a9d0d4b365c86ddcf90099",
+    "content-hash": "342efc8bf063abd8547783f1b1bfeb00",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -167,16 +166,16 @@
         },
         {
             "name": "cebe/markdown",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2"
+                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/54a2c49de31cc44e864ebf0500a35ef21d0010b2",
-                "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
                 "shasum": ""
             },
             "require": {
@@ -223,7 +222,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2015-03-06 05:28:07"
+            "time": "2016-09-14T20:40:20+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -267,7 +266,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2013-11-30 08:25:19"
+            "time": "2013-11-30T08:25:19+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -345,26 +344,34 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-03-13 16:08:35"
+            "time": "2016-03-13T16:08:35+00:00"
         },
         {
             "name": "psr/log",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
                 "shasum": ""
             },
+            "require": {
+                "php": ">=5.3.0"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -378,25 +385,26 @@
                 }
             ],
             "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
             "keywords": [
                 "log",
                 "psr",
                 "psr-3"
             ],
-            "time": "2012-12-21 11:40:51"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "robrichards/xmlseclibs",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robrichards/xmlseclibs.git",
-                "reference": "1b78df099c107279e9069a7b7608be98fd530dfd"
+                "reference": "53bb1e9cae490a8f93af41bd9df6ea897161ca05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/1b78df099c107279e9069a7b7608be98fd530dfd",
-                "reference": "1b78df099c107279e9069a7b7608be98fd530dfd",
+                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/53bb1e9cae490a8f93af41bd9df6ea897161ca05",
+                "reference": "53bb1e9cae490a8f93af41bd9df6ea897161ca05",
                 "shasum": ""
             },
             "require": {
@@ -424,25 +432,25 @@
                 "xml",
                 "xmldsig"
             ],
-            "time": "2015-07-31 15:08:38"
+            "time": "2016-09-08T13:15:00+00:00"
         },
         {
             "name": "silinternational/idp-pw-api-common",
-            "version": "dev-master",
+            "version": "1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silinternational/idp-pw-api-common.git",
-                "reference": "8256c143c07e6c6f80cac9bb106ea1d8b2de7904"
+                "reference": "68259ed6136da9cfcda4e6ba5d43db6a5049de87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silinternational/idp-pw-api-common/zipball/8256c143c07e6c6f80cac9bb106ea1d8b2de7904",
-                "reference": "8256c143c07e6c6f80cac9bb106ea1d8b2de7904",
+                "url": "https://api.github.com/repos/silinternational/idp-pw-api-common/zipball/68259ed6136da9cfcda4e6ba5d43db6a5049de87",
+                "reference": "68259ed6136da9cfcda4e6ba5d43db6a5049de87",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0",
-                "yiisoft/yii2": "2.0.6"
+                "yiisoft/yii2": "*"
             },
             "require-dev": {
                 "phpunit/phpunit": "5.2.9"
@@ -464,7 +472,7 @@
                 }
             ],
             "description": "Common interfaces and bases classes for integration components.",
-            "time": "2016-04-07 13:34:25"
+            "time": "2016-07-29T18:12:19+00:00"
         },
         {
             "name": "silinternational/yii2-jsonsyslog",
@@ -501,20 +509,20 @@
                 "syslog",
                 "yii2"
             ],
-            "time": "2015-08-19 15:07:38"
+            "time": "2015-08-19T15:07:38+00:00"
         },
         {
             "name": "simplesamlphp/saml2",
-            "version": "v2.2",
+            "version": "v2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/saml2.git",
-                "reference": "0d6861bc2966249702e623d325609adb2a782612"
+                "reference": "967edad97f38578f9b4561d6f624c974dd2c14a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/0d6861bc2966249702e623d325609adb2a782612",
-                "reference": "0d6861bc2966249702e623d325609adb2a782612",
+                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/967edad97f38578f9b4561d6f624c974dd2c14a9",
+                "reference": "967edad97f38578f9b4561d6f624c974dd2c14a9",
                 "shasum": ""
             },
             "require": {
@@ -553,7 +561,7 @@
                 }
             ],
             "description": "SAML2 PHP library from SimpleSAMLphp",
-            "time": "2016-03-16 13:39:22"
+            "time": "2016-12-14T16:34:56+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -641,24 +649,27 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-08-05 22:00:30"
+            "time": "2015-08-05T22:00:30+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-composer.git",
-                "reference": "7452fd908a5023b8bb5ea1b123a174ca080de464"
+                "reference": "3f4923c2bde6caf3f5b88cc22fdd5770f52f8df2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/7452fd908a5023b8bb5ea1b123a174ca080de464",
-                "reference": "7452fd908a5023b8bb5ea1b123a174ca080de464",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/3f4923c2bde6caf3f5b88cc22fdd5770f52f8df2",
+                "reference": "3f4923c2bde6caf3f5b88cc22fdd5770f52f8df2",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -688,15 +699,13 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2016-02-06 00:49:24"
+            "time": "2016-12-20T13:26:02+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "silinternational/idp-pw-api-common": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

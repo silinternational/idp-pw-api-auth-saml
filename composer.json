@@ -14,7 +14,7 @@
     "yiisoft/yii2": "*",
     "silinternational/yii2-jsonsyslog": "*",
     "simplesamlphp/saml2": "^2.2",
-    "silinternational/idp-pw-api-common": "dev-master",
+    "silinternational/idp-pw-api-common": "^1.0",
     "monolog/monolog": "1.18.1"
   },
   "autoload": {
