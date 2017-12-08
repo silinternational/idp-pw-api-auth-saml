@@ -15,7 +15,7 @@
     "silinternational/yii2-jsonsyslog": "*",
     "simplesamlphp/saml2": "^3.0.2",
     "silinternational/idp-pw-api-common": "^1.0",
-    "monolog/monolog": "1.18.1"
+    "monolog/monolog": "^1.23"
   },
   "autoload": {
     "psr-4": {

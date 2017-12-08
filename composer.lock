@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b23dfdcb5a0e24d5426681b243667e2c",
+    "content-hash": "38d2ce6bc1680cbf85ccb7956bab5de8",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -270,16 +270,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.18.1",
+            "version": "1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "a5f2734e8c16f3aa21b3da09715d10e15b4d2d45"
+                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/a5f2734e8c16f3aa21b3da09715d10e15b4d2d45",
-                "reference": "a5f2734e8c16f3aa21b3da09715d10e15b4d2d45",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
+                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
                 "shasum": ""
             },
             "require": {
@@ -290,17 +290,17 @@
                 "psr/log-implementation": "1.0.0"
             },
             "require-dev": {
-                "aws/aws-sdk-php": "^2.4.9",
+                "aws/aws-sdk-php": "^2.4.9 || ^3.0",
                 "doctrine/couchdb": "~1.0@dev",
                 "graylog2/gelf-php": "~1.0",
                 "jakub-onderka/php-parallel-lint": "0.9",
+                "php-amqplib/php-amqplib": "~2.4",
                 "php-console/php-console": "^3.1.3",
                 "phpunit/phpunit": "~4.5",
                 "phpunit/phpunit-mock-objects": "2.3.0",
-                "raven/raven": "^0.13",
                 "ruflin/elastica": ">=0.90 <3.0",
-                "swiftmailer/swiftmailer": "~5.3",
-                "videlalvaro/php-amqplib": "~2.4"
+                "sentry/sentry": "^0.13",
+                "swiftmailer/swiftmailer": "^5.3|^6.0"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
@@ -309,11 +309,11 @@
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
                 "php-console/php-console": "Allow sending log messages to Google Chrome",
-                "raven/raven": "Allow sending log messages to a Sentry server",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
                 "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
-                "videlalvaro/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib"
+                "sentry/sentry": "Allow sending log messages to a Sentry server"
             },
             "type": "library",
             "extra": {
@@ -344,7 +344,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-03-13T16:08:35+00:00"
+            "time": "2017-06-19T01:22:40+00:00"
         },
         {
             "name": "psr/log",
@@ -392,6 +392,46 @@
                 "psr-3"
             ],
             "time": "2016-10-10T12:19:37+00:00"
+        },
+        {
+            "name": "robrichards/xmlseclibs",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robrichards/xmlseclibs.git",
+                "reference": "d937712f70f93a584eb0299ccd87dc6374003781"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/d937712f70f93a584eb0299ccd87dc6374003781",
+                "reference": "d937712f70f93a584eb0299ccd87dc6374003781",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 5.4"
+            },
+            "suggest": {
+                "ext-openssl": "OpenSSL extension"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RobRichards\\XMLSecLibs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "A PHP library for XML Security",
+            "homepage": "https://github.com/robrichards/xmlseclibs",
+            "keywords": [
+                "security",
+                "signature",
+                "xml",
+                "xmldsig"
+            ],
+            "time": "2017-08-31T09:27:07+00:00"
         },
         {
             "name": "silinternational/idp-pw-api-common",
@@ -468,20 +508,21 @@
                 "syslog",
                 "yii2"
             ],
+            "abandoned": "silinternational/yii2-json-log-targets",
             "time": "2015-08-19T15:07:38+00:00"
         },
         {
             "name": "simplesamlphp/saml2",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/saml2.git",
-                "reference": "bacad25473258cfefb7a7fd418cc5f8a22cda0a1"
+                "reference": "bdafe52d52adb32c926c12c5139401546b4dc57b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/bacad25473258cfefb7a7fd418cc5f8a22cda0a1",
-                "reference": "bacad25473258cfefb7a7fd418cc5f8a22cda0a1",
+                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/bdafe52d52adb32c926c12c5139401546b4dc57b",
+                "reference": "bdafe52d52adb32c926c12c5139401546b4dc57b",
                 "shasum": ""
             },
             "require": {
@@ -490,7 +531,7 @@
                 "ext-zlib": "*",
                 "php": ">=5.3.3",
                 "psr/log": "~1.0",
-                "simplesamlphp/xmlseclibs": "^2.0|^3.0"
+                "robrichards/xmlseclibs": "^2.0|^3.0"
             },
             "require-dev": {
                 "mockery/mockery": "~0.9",
@@ -521,47 +562,7 @@
                 }
             ],
             "description": "SAML2 PHP library from SimpleSAMLphp",
-            "time": "2017-08-17T12:44:35+00:00"
-        },
-        {
-            "name": "simplesamlphp/xmlseclibs",
-            "version": "3.0.0-p1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/simplesamlphp/xmlseclibs.git",
-                "reference": "f9250fc4019f20650a01a1db7959c68c2c355e3b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/xmlseclibs/zipball/f9250fc4019f20650a01a1db7959c68c2c355e3b",
-                "reference": "f9250fc4019f20650a01a1db7959c68c2c355e3b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">= 5.4"
-            },
-            "suggest": {
-                "ext-openssl": "OpenSSL extension"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "RobRichards\\XMLSecLibs\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "A PHP library for XML Security",
-            "homepage": "https://github.com/robrichards/xmlseclibs",
-            "keywords": [
-                "security",
-                "signature",
-                "xml",
-                "xmldsig"
-            ],
-            "time": "2017-08-17T09:35:53+00:00"
+            "time": "2017-08-31T11:24:42+00:00"
         },
         {
             "name": "yiisoft/yii2",
